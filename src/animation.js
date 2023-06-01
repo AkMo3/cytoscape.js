@@ -3,6 +3,7 @@ import * as is from './is';
 import Promise from './promise';
 
 // Sample code change done here.
+// Test patch for 3.10.3
 
 let Animation = function( target, opts, opts2 ){
   let isCore = is.core(target);
