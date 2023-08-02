@@ -63,4 +63,6 @@ npm version $VERSION --allow-same-version
 
 git push && git push --tags
 
+git remote -v
+
 exit 0
