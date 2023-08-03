@@ -34003,7 +34003,7 @@ var printLayoutInfo;
     return style;
   };
 
-  var version = "snapshot";
+  var version = "3.26.5";
 
   var cytoscape = function cytoscape(options) {
     // if no options specified, use default
