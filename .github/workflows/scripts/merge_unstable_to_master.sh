@@ -43,8 +43,10 @@ git remote -v
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
+git status
+
 git checkout -b $NEXT_BACK_PORT_VERSION
-git push
+git push origin $NEXT_BACK_PORT_VERSION
 
 # Step 2: Make sure local unstable is up-to-date
 git checkout unstable
