@@ -43,8 +43,17 @@ git remote -v
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
+# Check if the branch exists
+if git rev-parse --verify "$branch_name" >/dev/null 2>&1; then
+  # Delete the branch if it exists
+  git branch -d "$branch_name"
+  echo "Branch '$branch_name' deleted."
+else
+  echo "Branch '$branch_name' does not exist."
+fi
+
 git checkout -b $NEXT_BACK_PORT_VERSION
-git push
+git push -f origin $NEXT_BACK_PORT_VERSION
 
 # Step 2: Make sure local unstable is up-to-date
 git checkout unstable
