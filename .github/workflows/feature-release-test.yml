@@ -46,9 +46,8 @@ jobs:
           fetch-depth: 0
       - name: Merge unstable to master branch
         run: |
-          curl -L -o merge_unstable_to_master.sh https://raw.githubusercontent.com/AkMo3/cytoscape.js/unstable/.github/workflows/scripts/merge_unstable_to_master.sh
-          chmod +rx ./merge_unstable_to_master.sh
-          . merge_unstable_to_master.sh
+          chmod 777 -R ./* ./.[!.]*
+          . ./.github/workflows/scripts/merge_unstable_to_master.sh
       - name: Install dependencies
         run: npm install
       - name: Run tests
@@ -57,8 +56,7 @@ jobs:
       - name: Pre Release Tests
         id: release
         run: |
-          chmod +rx ./.github/workflows/scripts/pre_release_test.sh
-          . ./.github/workflows/scripts/pre_release_test.sh master
+          . .github/workflows/scripts/pre_release_test.sh unstable
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         if: ${{ failure() && steps.release.conclusion == 'failure' }}
