@@ -73,7 +73,7 @@ git log -n 1
 
 npm version $VERSION --allow-same-version
 
-git push && git push --tags
+git push -f && git push -f --tags
 
 git remote -v
 
