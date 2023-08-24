@@ -31938,7 +31938,7 @@ sheetfn.appendToStyle = function (style) {
   return style;
 };
 
-var version = "3.26.9";
+var version = "3.26.10";
 
 var cytoscape = function cytoscape(options) {
   // if no options specified, use default
