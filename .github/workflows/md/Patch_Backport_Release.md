@@ -2,26 +2,25 @@
 
 ## Introduction
 
-The "Patch Release Test" GitHub Action automates the process of creating a patch release for the [Cytoscape.js](https://github.com/AkMo3/cytoscape.js) repository. This action allows you to define the target branch for the patch release and performs various tasks, including version updating, testing, publishing to npmjs and GitHub Releases, deploying to GitHub Pages, and more.
+The "Patch Release Test" GitHub Action automates the process of creating a patch release for the [Cytoscape.js](https://github.com/cytoscape/cytoscape.js) repository. This action allows you to define the target branch for the patch release and performs various tasks, including version updating, testing, publishing to npmjs and GitHub Releases, deploying to GitHub Pages, and more.
 
 ## Prerequisites
 
 Before using the "Patch Release Test" GitHub Action, ensure you have the following prerequisites:
 
-1. Access to the [Cytoscape.js](https://github.com/AkMo3/cytoscape.js) repository.
+1. Access to the [Cytoscape.js](https://github.com/cytoscape/cytoscape.js) repository.
 2. Necessary access tokens and secrets stored as GitHub repository secrets:
-   - `CYTOSCAPE_PUBLISH_TOKEN`: Token for npmjs package publishing.
-   - `CYTOSCAPE_JS_TOKEN`: Token for accessing GitHub API to publish GitHub Releases.
-
+   - `NPM_TOKEN`: Token for npmjs package publishing. Ref: [How to create legacy token in npm](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-legacy-tokens-on-the-website)
+   - `MAIN_GH_TOKEN`: Token for accessing GitHub API to publish GitHub Releases on Cytoscape/Cytoscape.js repo. Ref: [Create fine-grained-personal-access-tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#fine-grained-personal-access-tokens)
 
 ## Usage
 
-1. Navigate to the [Cytoscape.js](https://github.com/AkMo3/cytoscape.js) repository.
+1. Navigate to the [Cytoscape.js](https://github.com/cytoscape/cytoscape.js) repository.
 2. Go to the "Actions" tab.
 3. Click on the "Patch Release Test" workflow.
 4. Click the "Run workflow" button.
 5. Provide the target branch name for the patch release when prompted.
-
+6. For backport release: Make a corresponding patch release.
 
 ## Workflow Steps
 
