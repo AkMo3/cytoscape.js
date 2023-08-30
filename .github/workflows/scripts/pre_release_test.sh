@@ -25,8 +25,8 @@ FILE=./documentation/versions.json
 if [ -f "$FILE" ]; then
     echo "$FILE exists."
 else 
-  curl -L -o new-feature-version.sh https://raw.githubusercontent.com/AkMo3/cytoscape.js/master/documentation/versions.json
-  install -Dv new-feature-version.sh ./documentation/versions.json
+  echo "$FILE doesn't exists. Exiting..."
+  exit 1
 fi
 
 if [ "$current_branch" = "unstable" ]; then  
@@ -73,7 +73,7 @@ git log -n 1
 
 npm version $VERSION --allow-same-version
 
-git push -f && git push -f --tags
+git push && git push --tags
 
 git remote -v
 
