@@ -12,9 +12,10 @@ echo "CURRENT PATCH VERSION" $PATCH_VERSION
 # Remove leading zeros (if any) from PATCH_VERSION
 PATCH_VERSION="${PATCH_VERSION#"${PATCH_VERSION%%[1-9]*}"}"
 
-# Increment patch for new backport branch
-((PATCH_VERSION++))
+# Increment patch for the new backport branch
+PATCH_VERSION=$((10#${PATCH_VERSION} + 1))
 PATCH_VERSION="${PATCH_VERSION}"
+
 echo "UPDATED PATCH VERSION" $PATCH_VERSION
 
 VERSION="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.${PATCH_VERSION}"
