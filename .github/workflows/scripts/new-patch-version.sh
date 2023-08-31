@@ -5,16 +5,19 @@ echo "Prev Patch Version $PREV_VERSION"
 
 # Split the version number into major, minor, and patch components
 IFS='.' read -ra VERSION_ARRAY <<< "$PREV_VERSION"
-echo "IFS COMPLETED"
+echo "SPLITTING COMPLETED"
 PATCH_VERSION="${VERSION_ARRAY[2]}"
-echo "CURRENt PATCH VERSION" $PATCH_VERSION
+echo "CURRENT PATCH VERSION" $PATCH_VERSION
 
 # Increment patch for new backport branch
 ((PATCH_VERSION++))
 echo "UPDATED PATCH VERSION" $PATCH_VERSION
 
 VERSION="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.${PATCH_VERSION}"
-BRANCH="${VERSION_ARRAY[0]}.${MINOR_VERSION}.x"
+
+if [$BRANCH != "refs/heads/master"]; then
+    BRANCH="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.x"
+fi
 
 echo "Version $VERSION"
 
