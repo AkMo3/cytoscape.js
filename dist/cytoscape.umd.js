@@ -18604,10 +18604,12 @@
     }];
     var behavior = [{
       name: 'events',
-      type: t.bool
+      type: t.bool,
+      triggersZOrder: diff.any
     }, {
       name: 'text-events',
-      type: t.bool
+      type: t.bool,
+      triggersZOrder: diff.any
     }];
     var visibility = [{
       name: 'display',
@@ -34019,7 +34021,7 @@ var printLayoutInfo;
     return style;
   };
 
-  var version = "3.26.0";
+  var version = "3.26.13";
 
   var cytoscape = function cytoscape(options) {
     // if no options specified, use default
