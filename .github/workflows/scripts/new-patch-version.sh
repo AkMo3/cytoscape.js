@@ -7,6 +7,7 @@ echo "Prev Patch Version $PREV_VERSION"
 IFS='.' read -ra VERSION_ARRAY <<< "$PREV_VERSION"
 echo "SPLITTING COMPLETED"
 PATCH_VERSION="${VERSION_ARRAY[2]}"
+PATCH_VERSION="${PATCH_VERSION}"
 echo "CURRENT PATCH VERSION" $PATCH_VERSION
 
 # Increment patch for new backport branch
