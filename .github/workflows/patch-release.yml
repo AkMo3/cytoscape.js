@@ -2,11 +2,6 @@ name: Patch Release Test
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Define branch name'     
-        required: true
-        default: 'master'
 
 
 jobs:  
@@ -14,11 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - name: Get branch
-        id: get_branch
-        run: |
-          pwd
-          echo "BRANCH=${{ github.ref }}"  >> $GITHUB_ENV
+      - name: Extract branch name
+        shell: bash
+        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
       - name: checkout patch branch
         uses: actions/checkout@v3
         with:
