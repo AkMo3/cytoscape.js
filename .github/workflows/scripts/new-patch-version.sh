@@ -24,7 +24,7 @@ if [[ ${#VERSION_ARRAY_2[@]} -lt 3 ]]; then
     exit 1
 fi
 
-if [$BRANCH != "refs/heads/master"]; then
+if [ $BRANCH != "refs/heads/master" ]; then
     BRANCH="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}.x"
 fi
 
