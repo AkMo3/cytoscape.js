@@ -14,10 +14,10 @@ fi
 # Check if current Git branch is named "master"
 current_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 
-if [ "$current_branch" = "$1" ]; then
+if [[ "$current_branch" == "$1" || "refs/heads/$current_branch" == "$1" ]]; then
   echo "Current Git branch is $1."
 else
-  echo "Current Git branch is not $1."
+  echo "Current Git branch is not $1. Its $current_branch"
   return 2;
 fi
 
@@ -77,6 +77,6 @@ git push && git push --tags
 
 git remote -v
 
-git remote set-url origin git@github.com:cytoscape/cytoscape.js.git
+git remote set-url origin git@github.com:AkMo3/cytoscape.js.git
 
 exit 0
