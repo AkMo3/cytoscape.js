@@ -2,18 +2,14 @@ name: Feature Release
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        description: Version of new Release
 
 jobs:  
-  feature-release-test:
+  feature-release:
     runs-on: ubuntu-latest
     environment: prod
 
     steps:
-      - name: checkout patch branch
+      - name: checkout unstable branch
         uses: actions/checkout@v3
         with:
           ref: 'unstable'
@@ -23,16 +19,12 @@ jobs:
           node-version: 18
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
-      - name: Get new version string
+      - name: Determine version for the release
         id: get_new_patch_version
         run: |
           pwd
-          if [[ "${{ github.event.inputs.version }}" != "" ]]; then
-            echo "VERSION=${{ github.event.inputs.version }}"  >> $GITHUB_ENV
-          else 
-            chmod 777 -R ./* ./.[!.]*
-            . ./.github/workflows/scripts/new-feature-version.sh
-          fi
+          chmod 777 -R ./* ./.[!.]*
+          . ./.github/workflows/scripts/new-feature-version.sh
         shell: bash
       - name: See new master version and jq version
         run: |
@@ -44,7 +36,7 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - name: Merge unstable to master branch
+      - name: Update documentation and Merge unstable to master branch
         run: |
           . ./.github/workflows/scripts/merge_unstable_to_master.sh
       - name: Install dependencies
@@ -52,7 +44,7 @@ jobs:
       - name: Run tests
         run : |
           npm test
-      - name: Pre Release Tests
+      - name: Build release and verify changes
         id: release
         run: |
           . .github/workflows/scripts/pre_release_test.sh master
@@ -73,7 +65,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: Bearer ${{ secrets.MAIN_GH_TOKEN }}" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/cytoscape/cytoscape.js/releases \
+          https://api.github.com/repos/${{ github.repository }}/releases \
           -d '{"tag_name":"v${{ env.VERSION }}","target_commitish":"master","name":"v${{ env.VERSION }}","body":"Release version v${{ env.VERSION }}","draft":false,"prerelease":false,"generate_release_notes":false}'
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
