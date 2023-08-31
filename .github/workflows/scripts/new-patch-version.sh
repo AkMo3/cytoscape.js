@@ -7,9 +7,9 @@ echo "Prev Patch Version $PREV_VERSION"
 IFS='.' read -a VERSION_ARRAY <<< "$PREV_VERSION"
 echo "SPLITTING COMPLETED"
 
-major=${version_parts[0]}
-minor=${version_parts[1]}
-patch=${version_parts[2]}
+major=${VERSION_ARRAY[0]}
+minor=${VERSION_ARRAY[1]}
+patch=${VERSION_ARRAY[2]}
 echo "CURRENT PATCH VERSION" $patch
 
 patch=$((patch + 1))
