@@ -9,6 +9,9 @@ echo "SPLITTING COMPLETED"
 PATCH_VERSION="${VERSION_ARRAY[2]}"
 echo "CURRENT PATCH VERSION" $PATCH_VERSION
 
+# Remove leading zeros (if any) from PATCH_VERSION
+PATCH_VERSION="${PATCH_VERSION#"${PATCH_VERSION%%[1-9]*}"}"
+
 # Increment patch for new backport branch
 ((PATCH_VERSION++))
 PATCH_VERSION="${PATCH_VERSION}"
